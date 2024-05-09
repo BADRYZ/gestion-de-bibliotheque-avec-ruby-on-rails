@@ -14,36 +14,8 @@
  *= require_self
  */
 /* Add this CSS to your application's stylesheet */
-.navbar-nav {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Center the navbar brand logo if needed */
-.navbar-brand {
-    margin-right: auto; /* Centers the brand logo when the navbar is collapsed */
-}
-/* Center content style */
 .center-content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    text-align: center;
-    height: 100vh; /* Adjust based on your design needs */
 }
-
-/* Apply this class to the main container of your content */
-body, html {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden; /* Prevents horizontal scroll */
-}
-
-.container-fluid {
-    padding-right: 0;
-    padding-left: 0;
-}
-
-
- 
