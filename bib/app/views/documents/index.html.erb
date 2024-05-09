@@ -1,0 +1,30 @@
+<h1>Liste des documents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Titre</th>
+      <th>Disponible</th>
+      <th>ISBN</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @documents.each do |document| %>
+      <tr>
+        <td><%= document.type %></td>
+        <td><%= document.titre %></td>
+        <td><%= document.disponible ? 'Oui' : 'Non' %></td>
+        <td><%= document.isbn %></td>
+        <td>
+          <%= link_to 'Voir', document %>
+          <%= link_to 'Modifier', edit_document_path(document) %>
+          <%= link_to 'Supprimer', document, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce document ?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Ajouter un nouveau document', new_document_path %>

@@ -1,0 +1,30 @@
+<h1>Liste des matériels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Type</th>
+      <th>Marque</th>
+      <th>Disponible</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @materiels.each do |materiel| %>
+      <tr>
+        <td><%= materiel.materiel_id %></td>
+        <td><%= materiel.type %></td>
+        <td><%= materiel.marque %></td>
+        <td><%= materiel.disponible ? 'Oui' : 'Non' %></td>
+        <td>
+          <%= link_to 'Afficher', materiel %>
+          <%= link_to 'Modifier', edit_materiel_path(materiel) %>
+          <%= link_to 'Supprimer', materiel, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer ce matériel ?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Ajouter un nouveau matériel', new_materiel_path %>

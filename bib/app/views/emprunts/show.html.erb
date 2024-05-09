@@ -1,0 +1,21 @@
+<p>
+  <strong>Adhérent:</strong>
+  <%= @emprunt.adherent.nom %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <% if @emprunt.item_type == "Document" %>
+    <%= @emprunt.item.titre %>
+  <% elsif @emprunt.item_type == "Materiel" %>
+    <%= @emprunt.item.marque %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Type d'item:</strong>
+  <%= @emprunt.item_type %>
+</p>
+
+<%= link_to 'Modifier', edit_emprunt_path(@emprunt) %> |
+<%= link_to 'Retour', emprunts_path %>

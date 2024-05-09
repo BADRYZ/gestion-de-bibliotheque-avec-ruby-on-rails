@@ -1,0 +1,4 @@
+<div class="field">
+  <%= form.label :materiel_id %>
+  <%= form.collection_select :materiel_id, Materiel.all, :id, :marque %>
+</div>

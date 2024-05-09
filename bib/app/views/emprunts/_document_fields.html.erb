@@ -1,0 +1,4 @@
+<div class="field">
+  <%= form.label :document_id %>
+  <%= form.collection_select :document_id, Document.all, :id, :titre %>
+</div>

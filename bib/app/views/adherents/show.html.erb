@@ -1,0 +1,17 @@
+<p>
+  <strong>Nom:</strong>
+  <%= @adherent.nom %>
+</p>
+
+<p>
+  <strong>Prénom:</strong>
+  <%= @adherent.prenom %>
+</p>
+
+<p>
+  <strong>CIN:</strong>
+  <%= @adherent.cin %>
+</p>
+
+<%= link_to 'Edit', edit_adherent_path(@adherent) %> |
+<%= link_to 'Back', adherents_path %>

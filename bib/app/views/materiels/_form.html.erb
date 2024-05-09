@@ -1,0 +1,38 @@
+<%= form_with(model: @materiel) do |form| %>
+  <% if @materiel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@materiel.errors.count, "erreur") %> empêche(nt) la sauvegarde de ce matériel :</h2>
+
+      <ul>
+        <% @materiel.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div class="field">
+    <%= form.label :materiel_id %>
+    <%= form.text_field :materiel_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type %>
+  </div>
+
+  <div class="field">
+    <%= form.label :marque %>
+    <%= form.text_field :marque %>
+  </div>
+
+  <div class="field">
+    <%= form.label :disponible %>
+    <%= form.check_box :disponible %>
+  </div>
+
+  <!-- Add the ID field -->
+  <div class="actions">
+    <%= form.submit 'Enregistrer' %>
+  </div>
+<% end %>
