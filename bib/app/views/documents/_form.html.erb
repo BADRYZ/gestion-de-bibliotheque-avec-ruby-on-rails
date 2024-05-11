@@ -15,7 +15,8 @@
       <div class="form-group row">
         <%= form.label :type, class: "col-sm-2 col-form-label" %>
         <div class="col-sm-10">
-          <%= form.text_field :type, class: "form-control" %>
+            <%= form.select :type, ['Livres', 'Revues', 'Dictionnaires', 'BD'], { include_blank: 'Sélectionner un type' }, class: "form-control" %>
+
         </div>
       </div>
 

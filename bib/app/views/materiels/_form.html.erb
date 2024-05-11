@@ -21,7 +21,8 @@
     <div class="form-group row">
       <%= form.label :type, class: "col-sm-2 col-form-label" %>
       <div class="col-sm-10">
-        <%= form.text_field :type, class: "form-control" %>
+            <%= form.select :type, options_for_select(["Autre", "PC"], selected: @materiel.type), {}, class: "form-control" %>
+
       </div>
     </div>
 
