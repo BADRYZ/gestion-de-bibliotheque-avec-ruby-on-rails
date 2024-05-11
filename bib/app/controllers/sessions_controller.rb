@@ -1,5 +1,6 @@
 # app/controllers/sessions_controller.rb
 class SessionsController < ApplicationController
+  include SessionsHelper
   def new
   end
 

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include SessionsHelper
   helper_method :current_admin
 
   def current_admin
