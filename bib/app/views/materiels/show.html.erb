@@ -1,8 +1,21 @@
-<h1>Détails du matériel</h1>
+<div class="container text-center">
+  <div>
+    <p>
+      <strong>Type :</strong>
+      <%= text_field_tag 'type', @materiel.type, readonly: true, class: 'form-control', disabled: true %>
+    </p>
 
-<p><strong>Type :</strong> <%= @materiel.type %></p>
-<p><strong>Marque :</strong> <%= @materiel.marque %></p>
-<p><strong>Disponible :</strong> <%= @materiel.disponible ? 'Oui' : 'Non' %></p>
+    <p>
+      <strong>Marque :</strong>
+      <%= text_field_tag 'marque', @materiel.marque, readonly: true, class: 'form-control', disabled: true %>
+    </p>
 
-<%= link_to 'Modifier', edit_materiel_path(@materiel) %> |
-<%= link_to 'Retour', materiels_path %>
+    <p>
+      <strong>Disponible :</strong>
+      <%= text_field_tag 'disponible', @materiel.disponible ? 'Oui' : 'Non', readonly: true, class: 'form-control', disabled: true %>
+    </p>
+
+    <%= link_to 'Modifier', edit_materiel_path(@materiel), class: 'btn btn-primary' %> |
+    <%= link_to 'Retour', materiels_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
