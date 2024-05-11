@@ -25,13 +25,16 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <% if logged_in? %>
                 <ul class="nav navbar-nav navbar-center">
-                    <li><a href="#">Adhérent</a></li>
-                    <li><a href="#">Document</a></li>
-                    <li><a href="#">Matériel</a></li>
-                    <li><a href="#">Emprunt</a></li>
+                    <li><%= link_to "Adhérent", adherents_path %></li>
+                    <li><%= link_to "Document", documents_path %></li>
+                    <li><%= link_to "Materiel", materiels_path %></li>
+                    <li><%= link_to "Emprunt", emprunts_path %></li>
                 </ul>
             <% end %>
-            <button type="button" class="btn btn-success navbar-btn navbar-right">Connexion</button>
+            <%= link_to "Connexion", '/login', class: "btn btn-success navbar-btn navbar-right" %>
+            <%= link_to "Déconnexion", '/logout', method: :delete, class: "btn btn-danger navbar-btn navbar-right" %>
+
+
         </div>
     </div>
 </nav>
