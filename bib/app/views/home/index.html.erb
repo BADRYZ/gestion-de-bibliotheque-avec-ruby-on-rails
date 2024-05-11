@@ -2,10 +2,15 @@
 <div class="container">
     <!-- Alert if admin is not signed in -->
     <% unless admin_signed_in? %>
-        <div class="alert alert-danger" role="alert">
-            Vous devez être connecté en tant qu'administrateur pour accéder à ces fonctionnalités.
-        </div>
+    <div class="alert alert-danger" role="alert">
+        Vous devez être connecté en tant qu'administrateur pour accéder à ces fonctionnalités.
+    </div>
+    <% else %>
+    <div class="alert alert-success" role="alert">
+        Vous êtes connecté en tant qu'administrateur.
+    </div>
     <% end %>
+
     <!-- Welcome Message -->
     <div class="row justify-content-center">
         <div class="col-12 text-center">
