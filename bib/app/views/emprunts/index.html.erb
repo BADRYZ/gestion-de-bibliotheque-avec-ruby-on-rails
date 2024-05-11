@@ -18,7 +18,7 @@
             <% if emprunt.item_type == "Document" %>
               <%= emprunt.item.titre %> <!-- Supposant que les documents ont un attribut titre -->
             <% elsif emprunt.item_type == "Materiel" %>
-              <%= emprunt.item.marque %> <!-- Supposant que les matériels ont un attribut marque -->
+              <%= @emprunt.item.marque %><!-- Supposant que les matériels ont un attribut marque -->
             <% else %>
               <%= "Type non spécifié" %>
             <% end %>
