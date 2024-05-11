@@ -4,6 +4,17 @@ class SessionsController < ApplicationController
   def new
   end
 
+  # def create
+  #   admin = Admin.find_by(username: params[:session][:username])
+  #   if admin&.authenticate(params[:session][:password])
+  #     session[:admin_id] = admin.id
+  #     redirect_to root_path, notice: 'Successfully logged in!'
+  #   else
+  #     flash.now[:alert] = 'Invalid username or password'
+  #     render :new
+  #   end
+  # end
+  #
   def create
     admin = Admin.find_by(username: params[:session][:username])
     if admin&.authenticate(params[:session][:password])
