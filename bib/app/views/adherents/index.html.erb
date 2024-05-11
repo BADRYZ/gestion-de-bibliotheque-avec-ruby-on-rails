@@ -1,27 +1,28 @@
-<h1>Adhérents</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Prénom</th>
-      <th>CIN</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @adherents.each do |adherent| %>
+<div class="container text-center">
+  <h1>Adhérents</h1>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= adherent.nom %></td>
-        <td><%= adherent.prenom %></td>
-        <td><%= adherent.cin %></td>
-        <td>
-          <%= link_to 'Voir', adherent %>
-          <%= link_to 'Modifier', edit_adherent_path(adherent) %>
-          <%= link_to 'Supprimer', adherent, method: :delete, data: { confirm: 'Are you sure?' } %>
-
-        </td>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>CIN</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= link_to 'Ajouter un nouvel adhérent', new_adherent_path %>
+    </thead>
+    <tbody>
+      <% @adherents.each do |adherent| %>
+        <tr>
+          <td><%= adherent.nom %></td>
+          <td><%= adherent.prenom %></td>
+          <td><%= adherent.cin %></td>
+          <td>
+            <%= link_to 'Voir', adherent, class: 'btn btn-primary btn-sm' %>
+            <%= link_to 'Modifier', edit_adherent_path(adherent), class: 'btn btn-warning btn-sm' %>
+            <%= link_to 'Supprimer', adherent, method: :delete, data: { confirm: 'Êtes-vous sûr?' }, class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'Ajouter un nouvel adhérent', new_adherent_path, class: 'btn btn-success' %>
+</div>

@@ -1,17 +1,22 @@
-<p>
-  <strong>Nom:</strong>
-  <%= @adherent.nom %>
-</p>
+<div class="container text-center">
+  <h1>Voire un Adhérents</h1>
+  <div>
+    <p>
+      <strong>Nom:</strong>
+      <%= text_field_tag 'nom', @adherent.nom, readonly: true, class: 'form-control', disabled: true %>
+    </p>
 
-<p>
-  <strong>Prénom:</strong>
-  <%= @adherent.prenom %>
-</p>
+    <p>
+      <strong>Prénom:</strong>
+      <%= text_field_tag 'prenom', @adherent.prenom, readonly: true, class: 'form-control', disabled: true %>
+    </p>
 
-<p>
-  <strong>CIN:</strong>
-  <%= @adherent.cin %>
-</p>
+    <p>
+      <strong>CIN:</strong>
+      <%= text_field_tag 'cin', @adherent.cin, readonly: true, class: 'form-control', disabled: true %>
+    </p>
 
-<%= link_to 'Edit', edit_adherent_path(@adherent) %> |
-<%= link_to 'Back', adherents_path %>
+    <%= link_to 'Modifier', edit_adherent_path(@adherent), class: 'btn btn-primary' %> |
+    <%= link_to 'Retour', adherents_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
