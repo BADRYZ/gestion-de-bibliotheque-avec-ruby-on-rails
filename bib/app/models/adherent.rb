@@ -22,6 +22,8 @@ class Adherent < ApplicationRecord
   validates :cin, uniqueness: true, presence: true
 
   # Associations (si nécessaire)
+  has_many :emprunts, dependent: :destroy
+
   has_many :emprunts
   has_many :documents, through: :emprunts, source: :item, source_type: 'Document'
   has_many :materiels, through: :emprunts, source: :item, source_type: 'Materiel'

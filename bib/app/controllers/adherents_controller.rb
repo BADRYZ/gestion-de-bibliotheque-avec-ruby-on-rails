@@ -2,6 +2,8 @@ class AdherentsController < ApplicationController
   before_action :set_adherent, only: [:show, :edit, :update, :destroy]
   #has_many :emprunts, dependent: :destroy
 
+  #has_many :emprunts, dependent: :destroy
+
   def index
     @adherents = Adherent.all
   end
@@ -33,15 +35,25 @@ class AdherentsController < ApplicationController
     end
   end
 
+  # def destroy
+  #   @adherent = Adherent.find(params[:id])
+  #   if @adherent.destroy
+  #     redirect_to adherents_path, notice: 'Adhérent was successfully destroyed.'
+  #   else
+  #     redirect_to adherents_path, alert: 'Failed to delete adhérent.'
+  #   end
+  # end
   def destroy
     @adherent = Adherent.find(params[:id])
-    if @adherent.destroy
+    begin
+      # Essayer de supprimer les emprunts ou d'autres relations ici si nécessaire
+      @adherent.emprunts.destroy_all # ou une autre logique selon le cas
+      @adherent.destroy
       redirect_to adherents_path, notice: 'Adhérent was successfully destroyed.'
-    else
-      redirect_to adherents_path, alert: 'Failed to delete adhérent.'
+    rescue ActiveRecord::RecordNotDestroyed
+      redirect_to adherents_path, alert: 'Failed to delete adhérent because dependent records exist.'
     end
   end
-
 
 
 
