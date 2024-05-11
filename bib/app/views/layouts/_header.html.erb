@@ -30,11 +30,10 @@
                     <li><%= link_to "Materiel", materiels_path %></li>
                     <li><%= link_to "Emprunt", emprunts_path %></li>
                 </ul>
+                <%= link_to "Déconnexion", logout_path, method: :delete, class: "btn btn-danger navbar-btn navbar-right" %>
+            <% else %>
+                <%= link_to "Connexion", login_path, class: "btn btn-success navbar-btn navbar-right" %>
             <% end %>
-            <%= link_to "Connexion", '/login', class: "btn btn-success navbar-btn navbar-right" %>
-            <%= link_to "Déconnexion", '/logout', method: :delete, class: "btn btn-danger navbar-btn navbar-right" %>
-
-
         </div>
     </div>
 </nav>
