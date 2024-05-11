@@ -1,36 +1,38 @@
-<h1>Liste des emprunts</h1>
+<div class="container text-center">
+  <h1>Liste des emprunts</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Adhérent</th>
-      <th>Item</th>
-      <th>Type d'item</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @emprunts.each do |emprunt| %>
+  <table class="table table-striped mx-auto">
+    <thead>
       <tr>
-        <td><%= emprunt.adherent.cin %></td>
-        <td>
-          <% if emprunt.item_type == "Document" %>
-            <%= emprunt.item.titre %> <!-- Supposant que les documents ont un attribut titre -->
-          <% elsif emprunt.item_type == "Materiel" %>
-            <%= emprunt.item.marque %> <!-- Supposant que les matériels ont un attribut marque -->
-          <% else %>
-            <%= "Type non spécifié" %>
-          <% end %>
-        </td>
-        <td><%= emprunt.item_type %></td>
-        <td>
-          <%= link_to 'Afficher', emprunt_path(emprunt) %> <!-- Assurez-vous que c'est emprunt_path pour un emprunt spécifique -->
-          <%= link_to 'Modifier', edit_emprunt_path(emprunt) %>
-          <%= link_to 'Supprimer', emprunt, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cet emprunt ?' } %>
-        </td>
+        <th>Adhérent</th>
+        <th>Item</th>
+        <th>Type d'item</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @emprunts.each do |emprunt| %>
+        <tr>
+          <td><%= emprunt.adherent.cin %></td>
+          <td>
+            <% if emprunt.item_type == "Document" %>
+              <%= emprunt.item.titre %> <!-- Supposant que les documents ont un attribut titre -->
+            <% elsif emprunt.item_type == "Materiel" %>
+              <%= emprunt.item.marque %> <!-- Supposant que les matériels ont un attribut marque -->
+            <% else %>
+              <%= "Type non spécifié" %>
+            <% end %>
+          </td>
+          <td><%= emprunt.item_type %></td>
+          <td>
+            <%= link_to 'Afficher', emprunt_path(emprunt), class: 'btn btn-primary btn-sm' %> <!-- Assurez-vous que c'est emprunt_path pour un emprunt spécifique -->
+            <%= link_to 'Modifier', edit_emprunt_path(emprunt), class: 'btn btn-warning btn-sm' %>
+            <%= link_to 'Supprimer', emprunt, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cet emprunt ?' }, class: 'btn btn-danger btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'Nouvel emprunt', new_emprunt_path %>
+  <%= link_to 'Nouvel emprunt', new_emprunt_path, class: 'btn btn-success d-block mx-auto' %>
+</div>

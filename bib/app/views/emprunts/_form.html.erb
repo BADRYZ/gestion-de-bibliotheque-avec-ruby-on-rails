@@ -1,67 +1,69 @@
-<%= form_with(model: @emprunt) do |form| %>
-  <% if @emprunt.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@emprunt.errors.count, "erreur") %> empêche(nt) la sauvegarde de cet emprunt :</h2>
+<div class="container">
+  <div class="text-center">
+    <%= form_with(model: @emprunt) do |form| %>
+      <% if @emprunt.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@emprunt.errors.count, "erreur") %> empêche(nt) la sauvegarde de cet emprunt :</h2>
+          <ul>
+            <% @emprunt.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-      <ul>
-        <% @emprunt.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+      <div class="form-group">
+        <%= form.label :adherent_id %>
+        <%= form.collection_select :adherent_id, Adherent.all, :id, :full_name, {}, { class: "form-control" } %>
+      </div>
 
-  <div class="field">
-    <%= form.label :adherent_id %>
-    <%= form.collection_select :adherent_id, Adherent.all, :id, :full_name %>
+      <div class="form-group">
+        <%= form.label :item_type %>
+        <%= form.select :item_type, options_for_select(['', 'Document', 'Materiel']), {}, { id: 'item_type_select', class: "form-control" } %>
+      </div>
+
+      <div class="form-group" id="document_field" style="display: none;">
+        <%= form.label :item_id %>
+        <%= form.collection_select :item_id, Document.where(disponible: true), :id, :display_name, {}, { id: 'document_id_select', class: "form-control" } %>
+      </div>
+
+      <div class="form-group" id="materiel_field" style="display: none;">
+        <%= form.label :item_id %>
+        <%= form.collection_select :item_id, Materiel.where(disponible: true), :id, :display_name, {}, { id: 'materiel_id_select', class: "form-control" } %>
+      </div>
+
+      <div class="form-group">
+        <%= form.submit 'Enregistrer', class: "btn btn-primary" %>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const itemTypeIdSelect = document.getElementById('item_type_select');
+          const documentField = document.getElementById('document_field');
+          const materielField = document.getElementById('materiel_field');
+          const documentSelect = document.getElementById('document_id_select');
+          const materielSelect = document.getElementById('materiel_id_select');
+
+          itemTypeIdSelect.addEventListener('change', function() {
+            const selectedType = itemTypeIdSelect.value;
+
+            if (selectedType === 'Document') {
+              documentField.style.display = 'block';
+              materielField.style.display = 'none';
+              // Assurez-vous que l'ID du matériel est réinitialisé
+              materielSelect.value = '';
+            } else if (selectedType === 'Materiel') {
+              documentField.style.display = 'none';
+              materielField.style.display = 'block';
+              // Assurez-vous que l'ID du document est réinitialisé
+              documentSelect.value = '';
+            } else {
+              documentField.style.display = 'none';
+              materielField.style.display = 'none';
+            }
+          });
+        });
+      </script>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= form.label :item_type %>
-    <%= form.select :item_type, options_for_select(['', 'Document', 'Materiel']), {}, { id: 'item_type_select' } %>
-  </div>
-
-  <div class="field" id="document_field" style="display: none;">
-    <%= form.label :item_id %>
-    <%= form.collection_select :item_id, Document.where(disponible: true), :id, :display_name, {}, { id: 'document_id_select' } %>
-  </div>
-
-  <div class="field" id="materiel_field" style="display: none;">
-    <%= form.label :item_id %>
-    <%= form.collection_select :item_id, Materiel.where(disponible: true), :id, :display_name, {}, { id: 'materiel_id_select' } %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Enregistrer' %>
-  </div>
-
-  <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const itemTypeIdSelect = document.getElementById('item_type_select');
-    const documentField = document.getElementById('document_field');
-    const materielField = document.getElementById('materiel_field');
-    const documentSelect = document.getElementById('document_id_select');
-    const materielSelect = document.getElementById('materiel_id_select');
-
-    itemTypeIdSelect.addEventListener('change', function() {
-      const selectedType = itemTypeIdSelect.value;
-
-      if (selectedType === 'Document') {
-        documentField.style.display = 'block';
-        materielField.style.display = 'none';
-        // Assurez-vous que l'ID du matériel est réinitialisé
-        materielSelect.value = '';
-      } else if (selectedType === 'Materiel') {
-        documentField.style.display = 'none';
-        materielField.style.display = 'block';
-        // Assurez-vous que l'ID du document est réinitialisé
-        documentSelect.value = '';
-      } else {
-        documentField.style.display = 'none';
-        materielField.style.display = 'none';
-      }
-    });
-  });
-</script>
-
-<% end %>
+</div>
