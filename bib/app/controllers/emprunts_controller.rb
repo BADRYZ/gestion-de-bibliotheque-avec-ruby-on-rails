@@ -1,5 +1,12 @@
 class EmpruntsController < ApplicationController
+  before_action :authenticate_admin
+
   before_action :set_emprunt, only: [:show, :edit, :update, :destroy]
+  def authenticate_admin
+    unless current_admin
+      redirect_to login_path, alert: "Please sign in first."
+    end
+  end
 
   def index
     @emprunts = Emprunt.includes(:adherent, :item).all

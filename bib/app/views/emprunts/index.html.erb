@@ -11,31 +11,63 @@
       </tr>
     </thead>
     <tbody>
-      <% @emprunts.each do |emprunt| %>
-        <tr>
-          <td><%= emprunt.adherent.cin %></td>
-          <td>
-            <% if emprunt.item %>
-                <% if emprunt.item_type == "Document" %>
-                  <%= emprunt.item.titre %>
-                <% elsif emprunt.item_type == "Materiel" %>
-                  <%= emprunt.item.marque %>
-                <% end %>
-                <% else %>
-                <%= "Aucun item associé" %>
-              <% end %>
+  <% @emprunts.each do |emprunt| %>
+    <tr data-adherent="<%= emprunt.adherent.cin %>" data-item="<%= emprunt.item ? (emprunt.item_type == 'Document' ? emprunt.item.titre : emprunt.item.marque) : 'Aucun item associé' %>" data-item-type="<%= emprunt.item_type %>">
+      <td><%= emprunt.adherent.cin %></td>
+      <td>
+        <% if emprunt.item %>
+            <% if emprunt.item_type == "Document" %>
+              <%= emprunt.item.titre %>
+            <% elsif emprunt.item_type == "Materiel" %>
+              <%= emprunt.item.marque %>
+            <% end %>
+            <% else %>
+            <%= "Aucun item associé" %>
+          <% end %>
+      </td>
+      <td><%= emprunt.item_type %></td>
+      <td>
+        <%= link_to 'Afficher', emprunt_path(emprunt), class: 'btn btn-primary btn-sm' %>
+        <%= link_to 'Modifier', edit_emprunt_path(emprunt), class: 'btn btn-warning btn-sm' %>
+        <%= link_to 'Supprimer', emprunt, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cet emprunt ?' }, class: 'btn btn-danger btn-sm' %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
 
-          </td>
-          <td><%= emprunt.item_type %></td>
-          <td>
-            <%= link_to 'Afficher', emprunt_path(emprunt), class: 'btn btn-primary btn-sm' %> <!-- Assurez-vous que c'est emprunt_path pour un emprunt spécifique -->
-            <%= link_to 'Modifier', edit_emprunt_path(emprunt), class: 'btn btn-warning btn-sm' %>
-            <%= link_to 'Supprimer', emprunt, method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cet emprunt ?' }, class: 'btn btn-danger btn-sm' %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
   </table>
 
   <%= link_to 'Nouvel emprunt', new_emprunt_path, class: 'btn btn-success d-block mx-auto' %>
+  <button id="exportBtn" style="margin-left: 5px;" class="btn btn-primary">Export</button>
 </div>
+
+<script>
+  document.getElementById("exportBtn").addEventListener("click", function() {
+    // Créez un tableau pour stocker les données CSV
+    let csvData = [];
+    
+    // Ajoutez l'en-tête CSV
+    csvData.push(["adherent", "item", "item type"]);
+    
+    // Parcourez chaque ligne du tableau pour obtenir les informations
+    document.querySelectorAll("tbody tr").forEach(function(row) {
+      let adherent = row.getAttribute("data-adherent");
+      let item = row.getAttribute("data-item");
+      let itemType = row.getAttribute("data-item-type");
+      csvData.push([adherent, item, itemType]);
+    });
+
+    // Convertissez le tableau en chaîne CSV
+    let csvContent = "data:text/csv;charset=utf-8," + csvData.map(row => row.join(",")).join("\n");
+
+    // Créez un élément d'ancrage pour télécharger le fichier CSV
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "emprunts.csv");
+    document.body.appendChild(link);
+
+    // Cliquez sur le lien pour télécharger le fichier CSV
+    link.click();
+  });
+</script>

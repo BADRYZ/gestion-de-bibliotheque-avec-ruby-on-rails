@@ -9,4 +9,5 @@ class ApplicationController < ActionController::Base
   def authenticate_admin!
     redirect_to login_path, alert: 'You must be logged in to access this section' unless current_admin
   end
+
 end

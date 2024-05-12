@@ -1,8 +1,12 @@
 class AdherentsController < ApplicationController
+  before_action :authenticate_admin
   before_action :set_adherent, only: [:show, :edit, :update, :destroy]
-  #has_many :emprunts, dependent: :destroy
 
-  #has_many :emprunts, dependent: :destroy
+  def authenticate_admin
+    unless current_admin
+      redirect_to login_path, alert: "Please sign in first."
+    end
+  end
 
   def index
     @adherents = Adherent.all
@@ -35,19 +39,11 @@ class AdherentsController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @adherent = Adherent.find(params[:id])
-  #   if @adherent.destroy
-  #     redirect_to adherents_path, notice: 'Adhérent was successfully destroyed.'
-  #   else
-  #     redirect_to adherents_path, alert: 'Failed to delete adhérent.'
-  #   end
-  # end
   def destroy
     @adherent = Adherent.find(params[:id])
     begin
-      # Essayer de supprimer les emprunts ou d'autres relations ici si nécessaire
-      @adherent.emprunts.destroy_all # ou une autre logique selon le cas
+      # Optionally destroy dependent records if necessary
+      @adherent.emprunts.destroy_all # Adjust this line based on your associations
       @adherent.destroy
       redirect_to adherents_path, notice: 'Adhérent was successfully destroyed.'
     rescue ActiveRecord::RecordNotDestroyed
@@ -55,14 +51,13 @@ class AdherentsController < ApplicationController
     end
   end
 
-
-
   private
-    def set_adherent
-      @adherent = Adherent.find(params[:id])
-    end
 
-    def adherent_params
-      params.require(:adherent).permit(:nom, :prenom, :cin)
-    end
+  def set_adherent
+    @adherent = Adherent.find(params[:id])
+  end
+
+  def adherent_params
+    params.require(:adherent).permit(:nom, :prenom, :cin)
+  end
 end

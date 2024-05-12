@@ -25,4 +25,34 @@
     </tbody>
   </table>
   <%= link_to 'Ajouter un nouvel adhérent', new_adherent_path, class: 'btn btn-success' %>
+  <button id="exportBtn" style="margin-left: 5px;" class="btn btn-primary">Export</button>
 </div>
+
+
+<script>
+  document.getElementById("exportBtn").addEventListener("click", function() {
+    // Créez un tableau pour stocker les données CSV
+    let csvData = [];
+    
+    // Ajoutez len-tête CSV
+    csvData.push(["cin", "nom", "prenom"]);
+
+    // Parcourez chaque adhérent pour obtenir ses informations
+    <% @adherents.each do |adherent| %>
+      csvData.push(["<%= adherent.cin %>", "<%= adherent.nom %>", "<%= adherent.prenom %>"]);
+    <% end %>
+
+    // Convertissez le tableau en chaîne CSV
+    let csvContent = "data:text/csv;charset=utf-8," + csvData.map(row => row.join(",")).join("\n");
+
+    // Créez un élément d'ancrage pour télécharger le fichier CSV
+    let encodedUri = encodeURI(csvContent);
+    let link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "adh.csv");
+    document.body.appendChild(link);
+
+    // Cliquez sur le lien pour télécharger le fichier CSV
+    link.click();
+  });
+</script>
