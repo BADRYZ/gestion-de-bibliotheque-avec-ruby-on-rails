@@ -15,7 +15,7 @@ class Emprunt < ApplicationRecord
   #   end
   # end
 
-
+  belongs_to :item, optional: true
   belongs_to :adherent
   belongs_to :item, polymorphic: true
 

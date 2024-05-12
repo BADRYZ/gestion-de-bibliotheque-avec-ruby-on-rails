@@ -31,7 +31,7 @@
                     <h3>Adhérent</h3>
                     <p>Ceci pour CRUD adhérent.</p>
                     <p>
-                        <%= link_to "Commencer", adherents_path, class: "btn btn-info btn-commencer", role: "button", data: { confirm: "Vous devez être connecté en tant qu'administrateur pour accéder à cette fonctionnalité." } if admin_signed_in? %>
+                        <%= link_to "Commencer", adherents_path, class: "btn btn-info btn-commencer", role: "button" if admin_signed_in? %>
                     </p>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     <h3>Document</h3>
                     <p>Ceci pour CRUD Document.</p>
                     <p>
-                        <%= link_to "Commencer", documents_path, class: "btn btn-info btn-commencer", role: "button", data: { confirm: "Vous devez être connecté en tant qu'administrateur pour accéder à cette fonctionnalité." } if admin_signed_in? %>
+                        <%= link_to "Commencer", documents_path, class: "btn btn-info btn-commencer", role: "button" if admin_signed_in? %>
                     </p>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <h3>Matériel</h3>
                     <p>Ceci pour CRUD Matériel.</p>
                     <p>
-                        <%= link_to "Commencer", materiels_path, class: "btn btn-info btn-commencer", role: "button", data: { confirm: "Vous devez être connecté en tant qu'administrateur pour accéder à cette fonctionnalité." } if admin_signed_in? %>
+                        <%= link_to "Commencer", materiels_path, class: "btn btn-info btn-commencer", role: "button" if admin_signed_in? %>
                     </p>
                 </div>
             </div>
@@ -73,7 +73,7 @@
                     <h3>Emprunt</h3>
                     <p>Ceci pour CRUD Emprunt.</p>
                     <p>
-                        <%= link_to "Commencer", emprunts_path, class: "btn btn-info btn-commencer", role: "button", data: { confirm: "Vous devez être connecté en tant qu'administrateur pour accéder à cette fonctionnalité." } if admin_signed_in? %>
+                        <%= link_to "Commencer", emprunts_path, class: "btn btn-info btn-commencer", role: "button"  if admin_signed_in? %>
                     </p>
                 </div>
             </div>

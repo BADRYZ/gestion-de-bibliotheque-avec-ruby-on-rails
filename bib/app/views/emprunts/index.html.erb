@@ -15,13 +15,16 @@
         <tr>
           <td><%= emprunt.adherent.cin %></td>
           <td>
-            <% if emprunt.item_type == "Document" %>
-              <%= emprunt.item.titre %> <!-- Supposant que les documents ont un attribut titre -->
-            <% elsif emprunt.item_type == "Materiel" %>
-              <%= @emprunt.item.marque %><!-- Supposant que les matériels ont un attribut marque -->
-            <% else %>
-              <%= "Type non spécifié" %>
-            <% end %>
+            <% if emprunt.item %>
+                <% if emprunt.item_type == "Document" %>
+                  <%= emprunt.item.titre %>
+                <% elsif emprunt.item_type == "Materiel" %>
+                  <%= emprunt.item.marque %>
+                <% end %>
+                <% else %>
+                <%= "Aucun item associé" %>
+              <% end %>
+
           </td>
           <td><%= emprunt.item_type %></td>
           <td>
