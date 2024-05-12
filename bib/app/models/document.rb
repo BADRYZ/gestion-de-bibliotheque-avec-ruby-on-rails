@@ -7,8 +7,9 @@ class Document < ApplicationRecord
   validates :titre, presence: true
   validates :isbn, uniqueness: true, presence: true
   validates :disponible, inclusion: { in: [true, false] }
+  validates :auteur, presence: true  # Assuming you want it to be required, adjust as needed
 
   def display_name
-    "#{isbn}-#{titre}"
+    "#{isbn}-#{titre} by #{auteur}"  # Optionally include the author in the display name
   end
 end

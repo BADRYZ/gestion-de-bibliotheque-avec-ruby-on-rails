@@ -13,10 +13,6 @@ class DocumentsController < ApplicationController
     @document = Document.new
   end
 
-  def display_name
-    "#{isbn}-#{titre}"
-  end
-
   def edit
   end
 
@@ -48,6 +44,6 @@ class DocumentsController < ApplicationController
     end
 
     def document_params
-      params.require(:document).permit(:type, :titre, :disponible, :isbn)
+      params.require(:document).permit(:type, :titre, :isbn, :disponible, :auteur)
     end
 end

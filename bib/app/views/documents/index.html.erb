@@ -6,6 +6,7 @@
       <tr>
         <th>Type</th>
         <th>Titre</th>
+        <th>Auteur</th> <!-- Added column for author -->
         <th>Disponible</th>
         <th>ISBN</th>
         <th>Actions</th>
@@ -16,6 +17,7 @@
         <tr>
           <td><%= document.type %></td>
           <td><%= document.titre %></td>
+          <td><%= document.auteur %></td> <!-- Displaying author -->
           <td><%= document.disponible ? 'Oui' : 'Non' %></td>
           <td><%= document.isbn %></td>
           <td>
